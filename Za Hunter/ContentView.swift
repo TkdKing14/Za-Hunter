@@ -6,19 +6,53 @@
 //
 
 import SwiftUI
-
+import MapKit
 struct ContentView: View {
+    @StateObject var locationManager = LocationManager()
+    @State private var startPosition = MapCameraPosition.userLocation(fallback: .automatic)
+    @State private var places = [Place]()
+    @State private var mapRegion = MKCoordinateRegion()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Map(position: $startPosition) {
+                        UserAnnotation()
+                        ForEach(places) { place in
+                            Annotation(place.mapItem.name!, coordinate: place.mapItem.placemark.coordinate) {
+                                Image(systemName: "star.circle")
+                                    .resizable()
+                                    .foregroundStyle(.red)
+                                    .frame(width: 44, height: 44)
+                                    .background(.white)
+                                    .clipShape(.circle)
+                            }
+                        }
+                    }
+            .onMapCameraChange { context in
+                       mapRegion = context.region
+                       performSearch(item: "Pizza")
+                   }
+            }
         }
-        .padding()
+    func performSearch(item: String) {
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = item
+        searchRequest.region = mapRegion
+        let search = MKLocalSearch(request: searchRequest)
+        search.start()  { response, error in
+            if let response = response {
+                places.removeAll()
+                for mapItem in response.mapItems {
+                    places.append(Place(mapItem: mapItem))
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
+}
+struct Place: Identifiable {
+    let id = UUID()
+    let mapItem: MKMapItem
 }
