@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DFB569A52D67868400201DAD /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB569A42D67868400201DAD /* LocationDetailsView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DFB569262D52725600201DAD /* Za Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Za Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFB569A42D67868400201DAD /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		DFB5691D2D52725600201DAD = {
 			isa = PBXGroup;
 			children = (
+				DFB569A42D67868400201DAD /* LocationDetailsView.swift */,
 				DFB569282D52725600201DAD /* Za Hunter */,
 				DFB569272D52725600201DAD /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFB569A52D67868400201DAD /* LocationDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

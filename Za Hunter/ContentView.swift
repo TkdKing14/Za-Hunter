@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+
 struct ContentView: View {
     @StateObject var locationManager = LocationManager()
     @State private var startPosition = MapCameraPosition.userLocation(fallback: .automatic)
@@ -17,11 +18,9 @@ struct ContentView: View {
             Map(position: $startPosition) {
                 UserAnnotation()
                 ForEach(places) { place in
-                    Annotation(place.mapItem.name!, coordinate: place.mapItem.placemark.coordinate) {
-                        if let url = place.mapItem.url {
-                            Link(destination: url, label: {
-                                Image("pizza")
-                            })
+                    Annotation (place.mapItem.name!, coordinate: place.mapItem.placemark.coordinate) {
+                        NavigationLink(destination: LocationDetailsView(mapItem: place.mapItem)) {
+                            Image ("pizza")
                         }
                     }
                 }
